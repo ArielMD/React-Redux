@@ -1,0 +1,12 @@
+{
+    "printWidth": 79,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "jsxBracketSameLine": false,
+    "proseWrap": "always",
+    "formatOnPaste": true,
+    "formatOnSave": true,
+    "Arrow Functions Return Assignment": "No"
+  }
