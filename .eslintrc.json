@@ -19,6 +19,7 @@
     ],
     "rules": {
         "semi": [2, "always"],
-        "quotes": ["error", "double"]
+        "quotes": ["error", "double"],
+        "comma-dangle":["error", "only-multiline"]
     }
 }
