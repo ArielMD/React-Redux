@@ -7,8 +7,12 @@ module.exports = {
   output: {
     filename: "bundle.[hash].js",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
   },
   mode: "production",
+  devServer: {
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {
