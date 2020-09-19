@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { crearNuevoJuego } from "../redux/actions/gamesActions";
 
 const NuevoJuego = () => {
+  const [nombre, setNombre] = useState("");
+  const [precio, serPrecio] = useState(0);
+
+  const dispatch = useDispatch();
+
+  const submitNuevoJuego = (e) => {
+    e.preventDefault();
+
+    const nuevoJuego = {
+      nombre,
+      precio,
+    };
+    dispatch(crearNuevoJuego(nuevoJuego));
+  };
+
   return (
     <div className="row justify-content-center my-5">
       <div className="col-8">
@@ -9,7 +27,7 @@ const NuevoJuego = () => {
             <h2 className="text-center mb-4 font-weight-bold">
               Agregar un nuevo juego
             </h2>
-            <form>
+            <form onSubmit={submitNuevoJuego}>
               <div className="form-group">
                 <label>Nombre del juego</label>
                 <input
@@ -17,6 +35,8 @@ const NuevoJuego = () => {
                   className="form-control"
                   placeholder="Ingrese el nombre del producto"
                   name="nombre"
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
                 ></input>
               </div>
               <div className="form-group">
@@ -25,7 +45,9 @@ const NuevoJuego = () => {
                   type="text"
                   className="form-control"
                   placeholder="ingrese el precio del juego"
-                  name="nombre"
+                  name="precio"
+                  value={precio}
+                  onChange={(e) => serPrecio(Number(e.target.value))}
                 ></input>
               </div>
 
