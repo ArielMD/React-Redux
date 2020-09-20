@@ -72,6 +72,8 @@ export const eliminarJuego = (id) => {
         type: ELIMINAR_JUEGO_EXITO,
         payload: id,
       });
+
+      Swal.fire("Eliminado!", "El juego se ha eliminado", "success");
     } catch (error) {
       distpach({
         type: ELIMINAR_JUEGO_ERROR,

@@ -3,12 +3,26 @@ import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { eliminarJuego } from "../redux/actions/gamesActions";
+import Swal from "sweetalert2";
 
 const Game = ({ id, nombre, precio }) => {
   const dispatch = useDispatch();
 
   const eliminar = (id) => {
-    dispatch(eliminarJuego(id));
+    Swal.fire({
+      title: "¿Estas seguro?",
+      text: "No podras revertir esta accion",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, eliminar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(eliminarJuego(id));
+      }
+    });
   };
 
   return (
