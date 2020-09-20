@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-
 import { crearNuevoJuego } from "../redux/actions/gamesActions";
 
-const NuevoJuego = () => {
+const NuevoJuego = ({ history }) => {
   const [nombre, setNombre] = useState("");
   const [precio, serPrecio] = useState(0);
 
@@ -63,6 +63,10 @@ const NuevoJuego = () => {
       </div>
     </div>
   );
+};
+
+NuevoJuego.propTypes = {
+  history: PropTypes.object.isRequired,
 };
 
 export default NuevoJuego;
