@@ -4,6 +4,9 @@ import {
   AGREGAR_JUEGO_EXITO,
   OBTENER_JUEGOS_ERROR,
   OBTENER_JUEGOS_EXITO,
+  OBTENER_JUEGOS,
+  ELIMINAR_JUEGO_ERROR,
+  ELIMINAR_JUEGO_EXITO,
 } from "../../types/index";
 
 const initialState = {
@@ -14,6 +17,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case OBTENER_JUEGOS:
     case AGREGAR_JUEGO:
       return {
         ...state,
@@ -26,7 +30,7 @@ export default function (state = initialState, action) {
         loading: false,
         games: [...state.games, action.payload],
       };
-
+    case ELIMINAR_JUEGO_ERROR:
     case OBTENER_JUEGOS_ERROR:
     case AGREGAR_JUEGO_ERROR:
       return {
@@ -43,9 +47,17 @@ export default function (state = initialState, action) {
           games: action.payload,
         };
       } else {
-        return state;
+        return {
+          ...state,
+          loading: false,
+        };
       }
 
+    case ELIMINAR_JUEGO_EXITO:
+      return {
+        ...state,
+        games: state.games.filter((game, index) => index !== action.payload),
+      };
     default:
       return state;
   }

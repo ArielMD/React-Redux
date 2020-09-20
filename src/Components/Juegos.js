@@ -4,7 +4,7 @@ import { obtenerJuegos } from "../redux/actions/gamesActions";
 import Game from "./Game";
 
 const Juegos = () => {
-  const { games } = useSelector((state) => state.games);
+  const { games, loading, error } = useSelector((state) => state.games);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,6 +14,10 @@ const Juegos = () => {
   return (
     <React.Fragment>
       <h2 className="text-center my-5">Lista de juegos</h2>
+      {error ? <div className="alert alert-danger">Hubo un error</div> : null}
+      {loading ? (
+        <div className="alert alert-warning text-center">Cargando...</div>
+      ) : null}
       <table className="table">
         <thead className="bg-primary table-dark">
           <tr>

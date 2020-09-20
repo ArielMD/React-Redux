@@ -4,6 +4,9 @@ import {
   AGREGAR_JUEGO_EXITO,
   OBTENER_JUEGOS_ERROR,
   OBTENER_JUEGOS_EXITO,
+  OBTENER_JUEGOS,
+  ELIMINAR_JUEGO_ERROR,
+  ELIMINAR_JUEGO_EXITO,
 } from "../../types/index";
 
 import Swal from "sweetalert2";
@@ -44,6 +47,10 @@ export const crearNuevoJuego = (juego) => {
 
 export const obtenerJuegos = () => {
   return (distpach) => {
+    distpach({
+      type: OBTENER_JUEGOS,
+    });
+
     try {
       distpach({
         type: OBTENER_JUEGOS_EXITO,
@@ -52,6 +59,22 @@ export const obtenerJuegos = () => {
     } catch (error) {
       distpach({
         type: OBTENER_JUEGOS_ERROR,
+        payload: true,
+      });
+    }
+  };
+};
+
+export const eliminarJuego = (id) => {
+  return (distpach) => {
+    try {
+      distpach({
+        type: ELIMINAR_JUEGO_EXITO,
+        payload: id,
+      });
+    } catch (error) {
+      distpach({
+        type: ELIMINAR_JUEGO_ERROR,
         payload: true,
       });
     }
