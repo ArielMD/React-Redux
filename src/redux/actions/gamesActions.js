@@ -7,6 +7,9 @@ import {
   OBTENER_JUEGOS,
   ELIMINAR_JUEGO_ERROR,
   ELIMINAR_JUEGO_EXITO,
+  OBTENER_JUEGO_EDITAR,
+  EDITAR_JUEGO_ERROR,
+  EDITAR_JUEGO_EXITO,
 } from "../../types/index";
 
 import Swal from "sweetalert2";
@@ -79,6 +82,33 @@ export const eliminarJuego = (id) => {
         type: ELIMINAR_JUEGO_ERROR,
         payload: true,
       });
+    }
+  };
+};
+
+export const seleccionarJuego = (id) => {
+  return (distpach) => {
+    distpach({
+      type: OBTENER_JUEGO_EDITAR,
+      payload: id,
+    });
+  };
+};
+
+export const editarJuego = (juego) => {
+  return (distpach) => {
+    try {
+      distpach({
+        type: EDITAR_JUEGO_EXITO,
+        payload: juego,
+      });
+      Swal.fire("Guardado!", "Se han guardado cambios", "success");
+    } catch (error) {
+      distpach({
+        type: EDITAR_JUEGO_ERROR,
+        payload: true,
+      });
+      Swal.fire("Guardado!", "Se han guardado cambios", "warning");
     }
   };
 };

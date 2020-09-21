@@ -7,12 +7,16 @@ import {
   OBTENER_JUEGOS,
   ELIMINAR_JUEGO_ERROR,
   ELIMINAR_JUEGO_EXITO,
+  OBTENER_JUEGO_EDITAR,
+  EDITAR_JUEGO_ERROR,
+  EDITAR_JUEGO_EXITO,
 } from "../../types/index";
 
 const initialState = {
   games: [],
   error: false,
   loading: false,
+  juegoEditar: null,
 };
 
 export default function (state = initialState, action) {
@@ -30,6 +34,7 @@ export default function (state = initialState, action) {
         loading: false,
         games: [...state.games, action.payload],
       };
+    case EDITAR_JUEGO_ERROR:
     case ELIMINAR_JUEGO_ERROR:
     case OBTENER_JUEGOS_ERROR:
     case AGREGAR_JUEGO_ERROR:
@@ -57,6 +62,32 @@ export default function (state = initialState, action) {
       return {
         ...state,
         games: state.games.filter((game, index) => index !== action.payload),
+      };
+
+    case OBTENER_JUEGO_EDITAR: {
+      const editGame = state.games.filter(
+        (game, index) => index === action.payload
+      );
+      if (editGame.length === 0) {
+        return {
+          ...state,
+          juegoEditar: null,
+        };
+      } else {
+        return {
+          ...state,
+          juegoEditar: editGame[0],
+        };
+      }
+    }
+
+    case EDITAR_JUEGO_EXITO:
+      console.log(action.payload.id);
+      return {
+        ...state,
+        games: state.games.map((game, id) =>
+          id === action.payload.id ? action.payload : game
+        ),
       };
     default:
       return state;
